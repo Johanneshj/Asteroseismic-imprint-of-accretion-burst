@@ -1,0 +1,46 @@
+#!/bin/bash
+
+set -e
+source "${MESA_DIR}/star/test_suite/test_suite_helpers"
+# This provides the definition of do_one (run one part of the test)
+# do_one [inlist] [output model] [LOGS directory]
+
+date "+DATE: %Y-%m-%d%nTIME: %H:%M:%S"
+
+INITIAL_MODEL="models_to_load/0_initial_models/initial_model.mod"
+PRE_BURST_MODEL="models_to_load/1_pre_burst_models/pre_burst_model.mod"
+POST_BURST_MODEL="models_to_load/2_post_burst_models/post_burst_model.mod"
+
+# --- Initial model ---
+if [ ! -f "$INITIAL_MODEL" ]; then
+    echo "Running initial model..."
+    do_one 6_inlist_headers/0_inlist_initial_model_header
+else
+    echo "Initial model exists, skipping."
+fi
+
+# --- Pre-burst ---
+if [ ! -f "$PRE_BURST_MODEL" ]; then
+    echo "Running pre-burst phase..."
+    do_one 6_inlist_headers/1_inlist_pre_burst_header
+else
+    echo "Pre-burst model exists, skipping."
+fi
+
+# --- Burst ---
+# (Usually you always want to run this unless post exists)
+if [ ! -f "$POST_BURST_MODEL" ]; then
+    echo "Running burst phase..."
+    do_one 6_inlist_headers/2_inlist_burst_header
+else
+    echo "Post-burst model already exists, skipping burst."
+fi
+
+# --- Post-burst ---
+if [ -f "$POST_BURST_MODEL" ]; then
+    echo "Running post-burst phase..."
+    do_one 6_inlist_headers/3_inlist_post_burst_header
+fi
+
+date "+DATE: %Y-%m-%d%nTIME: %H:%M:%S"
+echo "finished"

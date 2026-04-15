@@ -1,0 +1,67 @@
+&constants
+/
+
+&model
+	model_type = 'EVOL'
+	file = './LOGS/profile_burst117.data.GYRE' 
+	file_format = 'MESA'
+/
+
+
+&mode
+	l = 1
+	m = 0
+	n_pg_min = -50
+  	n_pg_max = -1
+	tag = 'g'
+/
+
+&osc
+    outer_bound = 'DZIEM'
+    inner_bound = 'REGULAR'
+	nonadiabatic = .FALSE.
+	adiabatic = .TRUE.
+/
+
+&num
+    diff_scheme = 'MAGNUS_GL2' ! Second-order Gauss-Legendre collocation
+	ad_search = 'BRACKET' ! Bracket sign changes in the discriminant function
+	! nad_search = 'AD' ! Use adiabatic eigenfrequencies
+	restrict_roots = .FALSE.
+/
+
+&scan
+	grid_type = 'INVERSE'
+	freq_min = 0.05 ! Period 0.1 days
+	freq_max = 10 ! Period 4 days
+	n_freq = 2000
+	freq_min_units = 'CYC_PER_DAY'
+    freq_max_units = 'CYC_PER_DAY'
+	tag_list = 'g'
+/
+
+&rot
+/
+
+&grid
+    w_ctr = 40
+    w_osc = 40
+    w_exp = 10
+/
+
+&ad_output
+	summary_file = './GYRE/profile_burst117.data.GYRE.summary.ad.txt'
+	freq_units = 'CYC_PER_DAY'
+	summary_file_format = 'TXT'
+	detail_file_format = 'TXT'
+	summary_item_list = 'M_star, R_star, L_star, j, l, m, n_p, n_g, n_pg, omega, freq, E_norm,'
+/
+
+&nad_output
+	summary_file = './GYRE/profile_burst117.data.GYRE.summary.nad.txt'
+	freq_units = 'CYC_PER_DAY'
+	summary_file_format = 'TXT'
+	detail_file_format = 'TXT'
+	summary_item_list = 'M_star, R_star, L_star, j, l, m, n_p, n_g, n_pg, omega, freq, E_norm, W, eta,'
+/
+

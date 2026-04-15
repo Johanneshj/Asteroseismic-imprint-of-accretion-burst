@@ -1,0 +1,13 @@
+! burst parameters
+    x_logical_ctrl(1) = .false. ! if .true. we generate bursts randomly
+    x_integer_ctrl(1) = <<number_of_bursts>> ! Number of bursts
+
+    x_ctrl(10) = 4 ! rise time (years)
+    x_ctrl(11) = 100 ! plateau time (years)
+    x_ctrl(12) = 80 ! decay time (years)
+    x_ctrl(13) = <<burst_mag>> ! max accretion rate (Msun/yr)
+    x_ctrl(14) = 3.5 ! initiate burst at this mass (Msun)
+
+    x_integer_ctrl(5) = 50 ! timestep at burst rise (rise time divided by this)
+
+    

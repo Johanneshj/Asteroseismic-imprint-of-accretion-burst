@@ -1,0 +1,37 @@
+# Data (CRITICAL)
+data/
+LOGS/
+_LOGS/
+job_output/
+job_script*
+
+# MESA and GYRE
+star
+GYRE/
+.mesa_temp_cache/
+gifs/
+
+# Generated images
+png/
+png_burst/
+png_pre_burst/
+png_post_burst/
+photos/
+
+# Python
+__pycache__/
+*.pyc
+.python-version
+
+# Temporary / build
+*_old
+_*
+
+# Models (if large)
+# models_to_load/
+
+
+# Misc
+*.txt
+run_gyre.sh
+testhub.yml

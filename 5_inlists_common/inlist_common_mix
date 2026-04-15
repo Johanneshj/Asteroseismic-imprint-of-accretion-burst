@@ -1,0 +1,34 @@
+! mixing controls
+    MLT_option = 'Cox'
+	use_Ledoux_criterion = .true.
+	alpha_semiconvection = 1d-1
+	semiconvection_option = 'Langer_85 mixing; gradT = gradr'
+	mixing_length_alpha = 2.0d0
+	! Convective premixing, maybe not compatible with overshooting
+	! But maybe helps with off-center burning
+	do_conv_premix = .true.
+
+! Thermohaline mixing ! maybe helps with h2 off center burning
+	! thermohaline_option = 'Brown_Garaud_Stellmach_13'
+	! thermohaline_coeff = 1d0
+
+! Any top overshooting
+	overshoot_scheme(1) = 'exponential'
+	overshoot_zone_type(1) = 'any'
+	overshoot_zone_loc(1) = 'any'
+	overshoot_bdy_loc(1) = 'top'
+	overshoot_f(1) = 0.005d0
+	overshoot_f0(1) = 0.001d0
+
+! Any bottom overshooting
+	overshoot_scheme(2) = 'exponential'
+	overshoot_zone_type(2) = 'any'
+	overshoot_zone_loc(2) = 'any'
+	overshoot_bdy_loc(2) = 'bottom'
+	overshoot_f(2) = 0.0025d0
+	overshoot_f0(2) = 0.001d0
+
+! see herwing 1996 and buchelle 2025 on overshooting D_min
+    overshoot_D_min = 1d-2 ! 1d2 was mesa default (probably a typo)
+	set_min_D_mix = .true.
+	min_D_mix = 1d-2

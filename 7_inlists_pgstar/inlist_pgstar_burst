@@ -1,0 +1,176 @@
+&pgstar
+  Grid1_win_flag = .true.
+
+  Grid1_file_flag = .true.
+  Grid1_file_dir = 'png_burst'
+  Grid1_file_prefix = 'burst_'
+  Grid1_file_interval = 10
+  Grid1_file_width = 20
+  Grid1_file_aspect_ratio = -1
+
+  Grid1_num_cols = 40
+  Grid1_num_rows = 40
+  Grid1_num_plots = 6
+
+  Grid1_win_width = 14
+  Grid1_win_aspect_ratio = 1
+
+  Grid1_xleft = 0.1
+  Grid1_xright = 0.95
+  Grid1_ybot = 0.0
+  Grid1_ytop = 0.95
+  Grid1_title = ''
+
+  Grid1_plot_name(:) = ''
+  Grid1_plot_row(:) = 1
+  Grid1_plot_rowspan(:) = 1
+  Grid1_plot_col(:) = 1
+  Grid1_plot_colspan(:) = 1
+  Grid1_plot_pad_left(:) = 0.0
+  Grid1_plot_pad_right(:) = 0.0
+  Grid1_plot_pad_top(:) = 0.0
+  Grid1_plot_pad_bot(:) = 0.0
+  Grid1_txt_scale_factor(:) = 1.0 
+
+  Grid1_plot_name(1) = 'TRho_Profile'
+  Grid1_plot_row(1) = 1
+  Grid1_plot_rowspan(1) = 8
+  Grid1_plot_col(1) = 1
+  Grid1_plot_colspan(1) = 10
+  Grid1_plot_pad_left(1) = 0.0
+  Grid1_plot_pad_right(1) = 0.0
+  Grid1_plot_pad_top(1) = 0.0
+  Grid1_plot_pad_bot(1) = 0.0
+  Grid1_txt_scale_factor(1) = 0.4
+  TRho_Profile_xmin = -11
+  TRho_Profile_xmax = 4
+  TRho_Profile_ymin = 2.6
+  TRho_Profile_ymax = 8.5
+  show_TRho_Profile_mass_locs = .true.
+
+  Grid1_plot_name(2) = 'HR'
+  Grid1_plot_row(2) = 1
+  Grid1_plot_rowspan(2) = 8
+  Grid1_plot_col(2) = 15
+  Grid1_plot_colspan(2) = 10
+  Grid1_plot_pad_left(2) = 0.0
+  Grid1_plot_pad_right(2) = 0.0
+  Grid1_plot_pad_top(2) = 0.00
+  Grid1_plot_pad_bot(2) = 0.0
+  Grid1_txt_scale_factor(2) = 0.4
+
+  Grid1_plot_name(3) = 'Profile_Panels2'
+
+  Grid1_plot_row(3) = 1
+  Grid1_plot_rowspan(3) = 40
+  Grid1_plot_col(3) = 29
+  Grid1_plot_colspan(3) = 11
+  Grid1_plot_pad_left(3) = 0.0
+  Grid1_plot_pad_right(3) = 0.0
+  Grid1_plot_pad_top(3) = 0.0
+  Grid1_plot_pad_bot(3) = 0.04
+  Grid1_txt_scale_factor(3) = 0.4
+
+  Profile_Panels2_win_flag = .false.
+  Profile_Panels2_num_panels = 4
+  Profile_Panels2_yaxis_name(1) = 'Abundance'
+  Profile_Panels2_yaxis_name(2) = 'Power'
+  Profile_Panels2_yaxis_name(3) = 'gradr'
+  Profile_Panels2_other_yaxis_name(3) = 'gradL'
+  Profile_Panels2_yaxis_name(4) = 'brunt_N2'
+  Profile_Panels2_other_yaxis_name(4) = 'opacity'
+
+  
+  Profile_Panels2_xaxis_name = 'zone'
+  Profile_Panels2_ymax(1) = -2
+  Profile_Panels2_ymin(1) = -8
+  Profile_Panels2_ymin(2) = -8
+  Profile_Panels2_xaxis_reversed = .false.
+
+! Text_Summary windows
+  Grid1_plot_name(4) = 'Text_Summary1'
+  Grid1_plot_row(4) = 38
+  Grid1_plot_rowspan(4) = 3
+  Grid1_plot_col(4) = 0
+  Grid1_plot_colspan(4) = 25
+  Grid1_plot_pad_left(4) = -0.06
+  Grid1_plot_pad_right(4) = 0.0
+  Grid1_plot_pad_top(4) = 0.0
+  Grid1_plot_pad_bot(4) = 0.0
+  Grid1_txt_scale_factor(4) = 0.12
+
+  Text_Summary1_win_flag = .false.
+  Text_Summary1_dxval = 0.02
+
+  Text_Summary1_num_rows = 5 ! <= 20
+  Text_Summary1_num_cols = 4 ! <= 20
+  Text_Summary1_name(:,:) = ''
+
+  Text_Summary1_name(1,1) = 'model_number'
+  Text_Summary1_name(2,1) = 'log_star_age'
+  Text_Summary1_name(3,1) = 'log_dt'
+  Text_Summary1_name(4,1) = 'num_zones'
+  Text_Summary1_name(5,1) = 'num_retries'
+
+  Text_Summary1_name(1,2) = 'star_mass'  
+  Text_Summary1_name(2,2) = 'star_mdot'
+  Text_Summary1_name(3,2) = 'lg_Mdot'
+  Text_Summary1_name(4,2) = 'mass_conv_core'
+  Text_Summary1_name(5,2) = 'mdot_timescale'
+
+  Text_Summary1_name(1,3) = 'center_h1'
+  Text_Summary1_name(2,3) = 'center_h2'
+  Text_Summary1_name(3,3) = 'center_he3'
+  Text_Summary1_name(4,3) = 'center_li7'
+  Text_Summary1_name(5,3) = 'center_c12'
+
+  Text_Summary1_name(1,4) = 'log_L'
+  Text_Summary1_name(2,4) = 'log_Teff'
+  Text_Summary1_name(3,4) = 'log_g'
+  Text_Summary1_name(4,4) = 'log_R'
+  Text_Summary1_name(5,4) = 'radius'
+
+  Grid1_plot_name(5) = 'Kipp'
+  Grid1_plot_row(5) = 29
+  Grid1_plot_rowspan(5) = 6
+  Grid1_plot_col(5) = 1
+  Grid1_plot_colspan(5) = 23
+  Grid1_plot_pad_left(5) = 0.0
+  Grid1_plot_pad_right(5) = 0.0
+  Grid1_plot_pad_top(5) = 0.0
+  Grid1_plot_pad_bot(5) = 0.0
+  Grid1_txt_scale_factor(5) = 0.4
+  Kipp_xaxis_name = 'star_age'
+
+  Grid1_plot_name(6) = 'History_Panels1'
+  Grid1_plot_row(6) = 12
+  Grid1_plot_rowspan(6) = 14
+  Grid1_plot_col(6) = 1
+  Grid1_plot_colspan(6) = 21
+  Grid1_plot_pad_left(6) = 0.0
+  Grid1_plot_pad_right(6) = 0.0
+  Grid1_plot_pad_top(6) = 0.0
+  Grid1_plot_pad_bot(6) = 0.0
+  Grid1_txt_scale_factor(6) = 0.4
+
+  History_Panels1_win_flag = .false.
+  History_Panels1_num_panels = 2
+  History_Panels1_title = ''
+  
+  History_Panels1_xaxis_name = 'model_number'
+  History_Panels1_xmin = 1
+
+  History_Panels1_yaxis_name(1) = 'log_abs_mdot'
+  History_Panels1_ymin(1) = -12.1
+  History_Panels1_other_yaxis_name(1) = 'log_dt'
+
+  History_Panels1_yaxis_name(2) = 'mdot_timescale'
+  ! History_Panels1_ymin(2) = -12.1
+  History_Panels1_other_yaxis_name(2) = 'kh_timescale'
+
+  History_Panels1_max_width = 0
+
+
+/ ! end of pgstar namelist
+
+/ ! end of pgstar namelist

@@ -1,0 +1,90 @@
+! Timestep controls
+
+! Limit timestep based on changes in global properties
+! delta_*_limit are soft limits
+! delta_*_hard_limit are hard limits which force retries; careful with these as they can crash the model.
+! If hard limit crashes occur, consider relaxing the hard limits, set to -1 to disable.
+
+! Changes in mass and accretion rate
+	delta_lg_star_mass_limit = 1d-2
+	delta_mdot_limit = 1d-2
+
+! Surface luminosity
+    delta_lgL_limit = 1d-3
+    delta_lgL_hard_limit = -1
+
+! Surface temperature
+	delta_lgT_limit = 1d-3
+	delta_lgT_hard_limit = -1
+
+! Surface radius
+	delta_lgR_limit = 1d-3
+	delta_lgR_hard_limit = -1
+
+! Luminosity from H-burning
+    delta_lgL_H_limit = 1d-3
+    delta_lgL_H_hard_limit = -1 ! This will force a lot of retries during intense mixing/burning episodes 
+	! (fx growing/receding convective core or accretion bursts)
+	! Should probably not be enabled unless you really need it
+
+! Path in HR-diagram; useful to capture rapid excursions from fx accretion bursts
+    delta_HR_limit = 1d-3
+    delta_HR_hard_limit = -1
+
+! Central density and temperature to help with rapid burning
+	delta_lgRho_cntr_limit = 1d-3
+	delta_lgRho_cntr_hard_limit = -1
+
+! Maximum temperature changes
+	delta_lgT_max_limit_only_after_near_zams = .false.
+	delta_lgT_max_limit = 1d-3
+	delta_lgT_max_hard_limit = -1
+
+	delta_lgT_cntr_limit_only_after_near_zams = .false.
+	delta_lgT_cntr_limit = 1d-3
+	delta_lgT_cntr_hard_limit = -1
+
+! Capture changes in anbundances of species on a cell-by-cell basis (dX_div_X)
+! All these elements (except h2) develop steep chemical gradients in the convective core boundary region
+! Only 9 species are allowed - why?
+	dX_limit_species(1) = 'h2'
+    dX_limit_species(1) = 'he3'
+    dX_limit_species(2) = 'c12'
+    dX_limit_species(3) = 'c13'
+    dX_limit_species(4) = 'n14'
+	dX_limit_species(5) = 'n15'
+	dX_limit_species(6) = 'o16'
+	dX_limit_species(7) = 'o17'
+	dX_limit_species(8) = 'o18'
+	dX_limit_species(9) = 'li7'
+    dX_div_X_limit(1:9) = 1d-2
+    dX_div_X_hard_limit(1:9) = 1d99
+    dX_div_X_limit_min_X(1:9) = 1d-12
+    dX_decreases_only(1:9) = .false.
+    dX_div_X_at_high_T_limit(1:9) = 1d-2
+    dX_div_X_at_high_T_hard_limit(1:9) = 1d99
+    dX_div_X_at_high_T_limit_lgT_min(1:9) = 6
+
+! Capture changes in luminosity gradient (cell-by-cell basis)
+! Can help avoid "noisy" burning (maybe)
+    ! dL_div_L_limit = 1d-1
+    ! dL_div_L_hard_limit = -1
+    ! dL_div_L_limit_min_L = -1d99 ! Lsun
+
+! EbF:
+! On the changes in total abundance of each isotope
+! one of the most useful timestep controls, period 
+	dX_nuc_drop_limit = 1d-3
+	dX_nuc_drop_limit_at_high_T = -1
+	dX_nuc_drop_min_X_limit = 1d-8 ! mininum abundance for dX_nuc_drop_limit to apply
+	dX_nuc_drop_max_A_limit = 70   
+	dX_nuc_drop_hard_limit = -1
+
+! Varcontrol; limits how much structure can change in a step
+    min_allowed_varcontrol_target = 1d-6
+
+! Factors for adjusting timestep after retries or successful steps
+	timestep_factor_for_retries = 0.6
+	min_timestep_factor = 0.7
+	max_timestep_factor = 1.1
+	min_timestep_limit = 1d-12 

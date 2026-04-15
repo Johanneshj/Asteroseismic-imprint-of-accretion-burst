@@ -1,0 +1,61 @@
+! meshing controls for pre-burst model
+    max_allowed_nz = 1000000 ! we will never reach this
+
+! minimum cell size in light of composition changes
+! number one settings that will result in numerical convergence
+	min_dq_for_xa = 1d-4 ! standard value is 1d-14, 1d-4 would be an upper limit -> allows for convergence
+    min_dq_for_xa_convective = -1 ! -1 means we use min_dq_for_xa for convection zones too
+    min_dq_for_logT = 1d-4
+    max_center_cell_dq = 1d-4
+    max_dq = 1d-3
+
+
+! Mesh refinement based on composition gradients (M.G. Pedersen+ 2018)
+! All these elements (except h2) develop steep chemical gradients in the convective core boundary region
+! Only 9 species are allowed - why?
+    ! xa_function_species(1) = 'h2'
+    xa_function_species(1) = 'he3'
+    xa_function_species(2) = 'c12'
+    xa_function_species(3) = 'c13'
+    xa_function_species(4) = 'n14'
+	xa_function_species(5) = 'n15'
+	xa_function_species(6) = 'o16'
+	xa_function_species(7) = 'o17'
+	xa_function_species(8) = 'o18'
+	xa_function_species(9) = 'h2'
+
+    xa_function_weight(1:9) = 60d0
+    xa_function_param(1:9) = 1d-2
+
+! Mesh refinement based on change in abundance per change in pressure
+! All these elements (except h2) develop steep chemical gradients in the convective core boundary region
+! Only 9 species are allowed - why?
+    ! mesh_logX_species(1) = 'h2'
+    mesh_logX_species(1) = 'he3'
+    mesh_logX_species(2) = 'c12'
+    mesh_logX_species(3) = 'c13'
+    mesh_logX_species(4) = 'n14'
+	mesh_logX_species(5) = 'n15'
+	mesh_logX_species(6) = 'o16'
+	mesh_logX_species(7) = 'o17'
+	mesh_logX_species(8) = 'o18'
+	mesh_logX_species(9) = 'h2'
+
+    mesh_logX_min_for_extra(1:9) = -12
+    mesh_dlogX_dlogP_extra(1:9) = 0.2d0
+    mesh_dlogX_dlogP_full_on(1:9) = 1d-6
+    mesh_dlogX_dlogP_full_off(1:9) = 1d-12
+
+! Mesh refinement based on gradients in T, P, and R (M.G. Pedersen+ 2018) 
+    T_function1_weight = 50d0
+    P_function_weight = 40d0
+    
+    R_function_weight = 20d0
+    R_function2_weight = 10d0
+    R_function2_param1 = 1000d0
+
+    ! E_function_weight = 80d0
+    ! E_function_param = 20d0
+
+! pp-mesh 
+    ! mesh_dlog_pp_dlogP_extra = 0.1d0

@@ -1,0 +1,137 @@
+! inlist to evolve a 15 solar mass star
+
+! For the sake of future readers of this file (yourself included),
+! ONLY include the controls you are actually using.  DO NOT include
+! all of the other controls that simply have their default values.
+
+&star_job
+
+  ! begin with a pre-main sequence model
+    create_pre_main_sequence_model = .true.
+    pre_ms_relax_to_start_radiative_core = .false.
+    pre_ms_relax_num_steps = 100
+
+  ! save a model at the end of the run
+  	save_model_when_terminate = .true.
+  	save_model_filename = "models_to_load/0_initial_models/<<initial_model_name>>"
+
+  ! display on-screen plots
+    pgstar_flag = .false.
+
+
+! change form lnd to lnPgas
+	!change_lnPgas_flag = .true.
+	!new_lnPgas_flag = .true.
+
+
+
+! set initial composition and nuclear reaction network
+  	set_uniform_initial_composition = .true.
+  	initial_zfracs = 8 
+
+	change_net = .true.
+	new_net_name = 'pp_and_cno_extras.net' ! 'basic.net' 
+	change_initial_net = .true.
+	T9_weaklib_full_off = 0.0001d0
+	T9_weaklib_full_on = 0.00011d0
+
+
+	set_initial_age = .true.
+	set_initial_model_number = .true.
+	set_initial_cumulative_energy_error = .true.
+
+! define method to calculate initial model
+  	create_pre_main_sequence_model = .true.
+  	pre_ms_T_c = 5e5 ! initial center temperature (below 1d6)
+
+	!pre_ms_guess_rho_c = 10
+  	relax_mass_scale = .true.
+  	dlgm_per_step = 1d-3 ! log10(delta M/Msun/step)
+	new_mass = <<seed_mass>>d0 ! 10 Mjupiter in Msun units
+  	change_mass_years_for_dt = 0.1
+
+	change_v_flag = .true.
+	new_v_flag = .true.
+
+	!change_conv_vel_flag = .true.
+	!new_conv_vel_flag = .true.
+
+/ !end of star_job namelist
+
+&eos
+  ! eos options
+  ! see eos/defaults/eos.defaults
+
+/ ! end of eos namelist
+
+
+&kap
+! kap options
+! see kap/defaults/kap.defaults
+
+	! OPAL asplund 2009 opacities.
+	kap_file_prefix = 'OP_a09_nans_removed_by_hand'    ! 'gs98' 'a09'  'OP_a09' 'OP_gs98', 'oplib_...'
+	kap_lowT_prefix = 'lowT_fa05_a09p'
+
+	use_Type2_opacities = .true. ! no helium burning.
+	kap_CO_prefix   = 'a09_co' ! 'gs98_co' 'a09_co'
+	Zbase = <<zbase>>d0 ! for type-2 only.
+
+	cubic_interpolation_in_X = .true.
+	cubic_interpolation_in_Z = .true.
+
+/ ! end of kap namelist
+
+
+&controls
+	do_history_file = .false.
+	write_profiles_flag = .false.
+
+! flag to do initial model
+	x_logical_ctrl(2) = .true. 
+! set initial mass
+  	initial_mass = <<mass_to_relax_from>>d0 ! seed_mass + 0.03 Msun
+
+! Atmopheres controls
+
+ 	mlt_make_surface_no_mixing = .true.     
+	atm_option = 'T_tau'
+	atm_T_tau_relation = 'Eddington'
+	atm_T_tau_opacity = 'varying' ! next best is 'iterated'
+
+	mesh_delta_coeff = <<mesh_coeff>>
+	!max_dq = 1d-4
+	max_allowed_nz = 1000000
+	! R_function_weight = 1d2
+	! T_function2_weight = 10
+	! T_function1_weight = 250
+
+	! initial metalicity
+	initial_z = <<initial_z>>d0
+	x_ctrl(1) = <<h2>>d0	!20		! deuterium abundance in ppm	
+	x_ctrl(2) = <<he3>>d0			! he3 abundance in ppm	
+
+	! radius control
+	x_ctrl(3) = <<seed_radius>>d0		! final radius
+
+! mixing controls
+
+	! set_min_D_mix = .true.
+	! min_D_mix = 1d-2
+	! mixing_length_alpha = 2.0  
+
+! convective premixing
+	! use_Ledoux_criterion = .true.
+	! do_conv_premix = .true.
+	!steps_before_use_gold_tolerances = 10000
+	!convergence_ignore_equL_residuals = .true.
+	!report_solver_progress = .true.
+	max_resid_jump_limit = 1d99
+
+	!<<mixing_controls>>
+	
+	! Mesh controls not ideal when seed is only 0.01 Msun,
+	! But can be turned on for higher-mass seeds.
+	! <<mesh_NO_controls>> 
+
+/ ! end of controls namelist

@@ -1,0 +1,66 @@
+! For the sake of future readers of this file (yourself included),
+! ONLY include the controls you are actually using.  DO NOT include
+! all of the other controls that simply have their default values.
+
+&star_job
+
+! save a model at the end of the run
+  	load_saved_model = .true.
+	load_model_filename = 'models_to_load/1_pre_burst_models/pre_burst_model.mod'
+
+! save model when terminate
+	save_model_when_terminate = .true.
+	save_model_filename = 'models_to_load/2_post_burst_models/post_burst_model.mod'
+
+! set initial composition and nuclear reaction network
+  	set_uniform_initial_composition = .false.
+  	! initial_zfracs = 8 
+
+! initial conditions
+    set_initial_dt = .true.
+	years_for_initial_dt = 0.02 ! ~1 month in years
+	! too low initial dt leads to instability
+
+	show_retry_counts_when_terminate = .true.
+	show_timestep_limit_counts_when_terminate = .true.
+
+	set_initial_model_number = .true.
+	set_initial_cumulative_energy_error = .true.
+
+! Relax to mdot init again for stability
+	! relax_mass_change = .true.
+	! relax_initial_mass_change = .true.
+	! relax_mass_change_min_steps = 10
+	! relax_mass_change_max_yrs_dt = 10 ! 9
+	! relax_mass_change_init_mdot = 0
+	! relax_mass_change_final_mdot = 1d-6
+	! disable_pgstar_during_relax_flag = .false.
+
+/ !end of star_job namelist
+
+
+&controls
+! LOGS and profiles
+	star_history_name = 'history_burst.data'
+	profiles_index_name = 'profiles_burst.index'
+	profile_data_prefix = 'profile_burst'
+
+! initial model flag
+	x_logical_ctrl(2) = .false.
+
+! Whether or not we set initial composition (we only do this when we evolve a constant accretion model or the pre-burst model)
+	x_logical_ctrl(5) = .false.
+
+! integer control for whether to save a pre-burst model or post-burst model
+	x_integer_ctrl(10) = 1 ! 0 = save pre-burst model 100 years before burst,
+						  ! 1 = save post-burst model 1000 years after burst
+						  ! 2 = use h1 termination string
+
+! Turn on mesh refinement after pre-burst model.
+! If .false. use use mesh factors specified here in inlist.
+    x_logical_ctrl(20) = .false.
+
+! Varcontrol; will control timesteps
+	varcontrol_target = 1d-5 
+
+/ ! end of controls namelist
