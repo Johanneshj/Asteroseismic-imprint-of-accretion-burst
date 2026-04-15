@@ -10,6 +10,7 @@ star
 GYRE/
 .mesa_temp_cache/
 gifs/
+gyre_1d-3*
 
 # Generated images
 png/
