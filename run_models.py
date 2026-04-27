@@ -27,6 +27,9 @@ dM                  = '0.05' # mass to accrete in decay of accretion rate (solar
 mdot                = '1d-5' # mass accretion rate outside of burst (must be given here as 1d-6 fx)
 decay_time          = '1000000' # Time scale of exponential decay     
 
+log_dir             = 'LOGS'
+photo_dir           = 'photos'
+
 # Should we do a burst?
 do_burst = False
 if do_burst:
@@ -209,6 +212,15 @@ tau = calculate_tau(float(dM), float(mdot.replace('d', 'e')), float(decay_time))
 inplace_change(f'5_inlists_common/inlist_common',
                '<<tau>>',
                str(tau))
+
+# LOGS and photos
+inplace_change(f'5_inlists_common/inlist_common', 
+               '<<log_directory>>', 
+               log_dir)
+
+inplace_change(f'5_inlists_common/inlist_common', 
+               '<<photo_directory>>', 
+               photo_dir)
 
 # -------- --------- #
 
