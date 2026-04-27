@@ -1,6 +1,6 @@
 ! burst parameters
     x_logical_ctrl(1) = .false. ! if .true. we generate bursts randomly
-    x_integer_ctrl(1) = 1 ! Number of bursts
+    x_integer_ctrl(1) = 0 ! Number of bursts
 
     x_ctrl(10) = 4 ! rise time (years)
     x_ctrl(11) = 100 ! plateau time (years)

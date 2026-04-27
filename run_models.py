@@ -20,19 +20,15 @@ seed_radius         = '1.5' # Relax to this radius
 burst_mag           = '1d-3' # magnitude of burst in solar masses per year
 time_delta_coeff    = '0.8' # MESA's time_delta_coeff
 
-pre_burst_model     = f'pre_burst_model.mod' # name of pre_burst_model saved at end of run
-post_burst_model    = f'post_burst_model.mod' # name of post_burst_model saved at end of run 
+pre_burst_model     = f'_pre_burst_model.mod' # name of pre_burst_model saved at end of run
+post_burst_model    = f'_post_burst_model.mod' # name of post_burst_model saved at end of run 
 ZAMS_mass           = '4.0d0' # Final mass at the ZAMS in solar masses
 dM                  = '0.05' # mass to accrete in decay of accretion rate (solar masses)
-mdot                = '1d-6' # mass accretion rate outside of burst (must be given here as 1d-6 fx)
-decay_time          = '1000000' # Time scale of exponential decay
-log_dir             = f'LOGS'
-png_dir             = f'png_pre_burst'
-png_prefix          = f'pre_burst_'
-photos_dir          = f'photos'        
+mdot                = '1d-5' # mass accretion rate outside of burst (must be given here as 1d-6 fx)
+decay_time          = '1000000' # Time scale of exponential decay     
 
 # Should we do a burst?
-do_burst = True
+do_burst = False
 if do_burst:
     number_of_bursts = '1'
     int_ctrl_10 = '0'
@@ -41,7 +37,7 @@ else:
     int_ctrl_10 = '2'
 
 # Should we save models?
-save_models = True
+save_models = False
 if save_models:
     save_models = '.true.'
 else:
@@ -54,7 +50,6 @@ shutil.copy('0_inlists_templates/inlist_initial_model_base', '1_inlists_initial_
 shutil.copy('0_inlists_templates/inlist_pre_burst_base', '2_inlists_pre_burst/inlist_pre_burst')
 shutil.copy('0_inlists_templates/inlist_burst_base', '3_inlists_burst/inlist_burst')
 shutil.copy('0_inlists_templates/inlist_post_burst_base', '4_inlists_post_burst/inlist_post_burst')
-shutil.copy('0_inlists_templates/inlist_pgstar_pre_burst_base', '7_inlists_pgstar/inlist_pgstar_pre_burst')
 shutil.copy('rn_template', 'rn')
 
 # -------- CHANGE RN -------- # 
@@ -215,23 +210,6 @@ inplace_change(f'5_inlists_common/inlist_common',
                '<<tau>>',
                str(tau))
 
-# LOGS dir
-inplace_change(f'5_inlists_common/inlist_common',
-               '<<log_directory>>',
-               log_dir)
-
-# Photos dir
-inplace_change(f'5_inlists_common/inlist_common',
-               '<<photo_directory>>',
-               photos_dir)
-
-# INLIST PGSTAR
-inplace_change(f'7_inlists_pgstar/inlist_pgstar_pre_burst', 
-               '<<png_folder>>', 
-               png_dir)
-inplace_change(f'7_inlists_pgstar/inlist_pgstar_pre_burst', 
-               '<<png_prefix>>', 
-               png_prefix)
 # -------- --------- #
 
 # Copy inlist files into one big inlist common

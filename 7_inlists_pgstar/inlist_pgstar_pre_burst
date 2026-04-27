@@ -10,7 +10,7 @@
 
   Grid1_num_cols = 40
   Grid1_num_rows = 40
-  Grid1_num_plots = 7
+  Grid1_num_plots = 6
 
   Grid1_win_width = 14
   Grid1_win_aspect_ratio = 1
@@ -75,9 +75,9 @@
   Profile_Panels2_num_panels = 4
   Profile_Panels2_yaxis_name(1) = 'Abundance'
   Profile_Panels2_yaxis_name(2) = 'Power'
-  Profile_Panels2_yaxis_name(3) = 'logT'
-  Profile_Panels2_other_yaxis_name(3) = 'logRho'
-  Profile_Panels2_yaxis_name(4) = 'dwork_dm'
+  Profile_Panels2_yaxis_name(3) = 'gradr'
+  Profile_Panels2_other_yaxis_name(3) = 'gradL'
+  Profile_Panels2_yaxis_name(4) = 'brunt_N2'
   Profile_Panels2_other_yaxis_name(4) = 'opacity'
 
   
@@ -89,8 +89,8 @@
 
 ! Text_Summary windows
   Grid1_plot_name(4) = 'Text_Summary1'
-  Grid1_plot_row(4) = 36
-  Grid1_plot_rowspan(4) = 4
+  Grid1_plot_row(4) = 38
+  Grid1_plot_rowspan(4) = 3
   Grid1_plot_col(4) = 0
   Grid1_plot_colspan(4) = 25
   Grid1_plot_pad_left(4) = -0.06
@@ -131,10 +131,10 @@
   Text_Summary1_name(5,4) = 'radius'
 
   Grid1_plot_name(5) = 'Kipp'
-  Grid1_plot_row(5) = 12
-  Grid1_plot_rowspan(5) = 8
+  Grid1_plot_row(5) = 29
+  Grid1_plot_rowspan(5) = 6
   Grid1_plot_col(5) = 1
-  Grid1_plot_colspan(5) = 10
+  Grid1_plot_colspan(5) = 23
   Grid1_plot_pad_left(5) = 0.0
   Grid1_plot_pad_right(5) = 0.0
   Grid1_plot_pad_top(5) = 0.0
@@ -143,10 +143,10 @@
   Kipp_xaxis_name = 'star_age'
 
   Grid1_plot_name(6) = 'History_Panels1'
-  Grid1_plot_row(6) = 24
-  Grid1_plot_rowspan(6) = 9
+  Grid1_plot_row(6) = 12
+  Grid1_plot_rowspan(6) = 14
   Grid1_plot_col(6) = 1
-  Grid1_plot_colspan(6) = 10
+  Grid1_plot_colspan(6) = 21
   Grid1_plot_pad_left(6) = 0.0
   Grid1_plot_pad_right(6) = 0.0
   Grid1_plot_pad_top(6) = 0.0
@@ -154,8 +154,8 @@
   Grid1_txt_scale_factor(6) = 0.4
 
   History_Panels1_win_flag = .false.
-  History_Panels1_num_panels = 1
-  History_Panels1_title = 'Accretion Rate (orange)'
+  History_Panels1_num_panels = 2
+  History_Panels1_title = ''
   
   History_Panels1_xaxis_name = 'model_number'
   History_Panels1_xmin = 1
@@ -164,30 +164,13 @@
   History_Panels1_ymin(1) = -12.1
   History_Panels1_other_yaxis_name(1) = 'log_dt'
 
+  History_Panels1_yaxis_name(2) = 'mdot_timescale'
+  ! History_Panels1_ymin(2) = -12.1
+  History_Panels1_other_yaxis_name(2) = 'kh_timescale'
+
   History_Panels1_max_width = 0
 
-  Grid1_plot_name(7) = 'History_Panels2'
-  Grid1_plot_row(7) = 24
-  Grid1_plot_rowspan(7) = 9
-  Grid1_plot_col(7) = 14
-  Grid1_plot_colspan(7) = 10
-  Grid1_plot_pad_left(7) = 0.0
-  Grid1_plot_pad_right(7) = 0.0
-  Grid1_plot_pad_top(7) = 0.0
-  Grid1_plot_pad_bot(7) = 0.0
-  Grid1_txt_scale_factor(7) = 0.4
 
-  History_Panels2_win_flag = .false.
-  History_Panels2_num_panels = 1
-  History_Panels2_title = 'Radius (orange)'
-  
-  History_Panels2_xaxis_name = 'model_number'
-  History_Panels2_xmin = 1
-
-  History_Panels2_yaxis_name(1) = 'radius'
-  ! History_Panels1_ymin(1) = -12.1
-  ! History_Panels1_other_yaxis_name(1) = 'log_dt'
-
-  History_Panels2_max_width = 0
+/ ! end of pgstar namelist
 
 / ! end of pgstar namelist

@@ -68,7 +68,7 @@
 
 ! How much mass do we accrete in exponential decay at end of accretion phase over time_decay years
 	x_ctrl(4) = 0.05d0 ! Msun
-	x_ctrl(5) = 40040.040040040054d0 ! Decay scale in order to capture decay of accretion rate
+	x_ctrl(5) = 4000.400040004001d0 ! Decay scale in order to capture decay of accretion rate
 	x_ctrl(16) = 1000000d0 ! Time for final decay in years
 ! initial z, must be specified for initial composition to work
 ! initial y determined from initial_y = 0.248 + 1.4 * initial_z
@@ -84,8 +84,8 @@
 ! accretion controls	
 ! Set accretion rate outside of potential bursts
 ! In run_star_extras, this is modified to accommodate initial increase and final decrease and potential bursts
-	mass_change = 1d-6 ! Msun/yr
-	x_ctrl(15) = 1d-6 ! For run_star_extras
+	mass_change = 1d-5 ! Msun/yr
+	x_ctrl(15) = 1d-5 ! For run_star_extras
 
 ! Accrete material with birth cloud composition
 	accrete_same_as_surface = .false.
@@ -237,7 +237,7 @@
 
 	! burst parameters
     x_logical_ctrl(1) = .false. ! if .true. we generate bursts randomly
-    x_integer_ctrl(1) = 1 ! Number of bursts
+    x_integer_ctrl(1) = 0 ! Number of bursts
 
     x_ctrl(10) = 4 ! rise time (years)
     x_ctrl(11) = 100 ! plateau time (years)

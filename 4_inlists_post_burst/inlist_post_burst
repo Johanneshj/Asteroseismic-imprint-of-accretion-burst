@@ -6,7 +6,7 @@
 
 ! save a model at the end of the run
   	load_saved_model = .true.
-	load_model_filename = 'models_to_load/2_post_burst_models/post_burst_model.mod'
+	load_model_filename = 'models_to_load/2_post_burst_models/_post_burst_model.mod'
 
 ! set initial composition and nuclear reaction network
   	set_uniform_initial_composition = .false.
