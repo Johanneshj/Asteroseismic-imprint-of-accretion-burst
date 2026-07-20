@@ -25,7 +25,8 @@
             s% data_for_extra_history_columns => data_for_extra_history_columns
             s% how_many_extra_profile_columns => how_many_extra_profile_columns
             s% data_for_extra_profile_columns => data_for_extra_profile_columns  
-            ! s% other_energy => energy_routine
+            
+            s% other_energy => energy_routine
             s% other_adjust_mdot => other_adjust_mdot
    
             s% how_many_extra_history_header_items => how_many_extra_history_header_items
@@ -292,14 +293,14 @@
 
             ! end if
 
-            if (s% x_integer_ctrl(10) .eq. 1) then
-               if (MOD(s% model_number, 10) .eq. 0) then
-                  s% need_to_save_profiles_now = .true.
-                  s% need_to_update_history_now = .true.
-                  s% save_profiles_model_priority = 5
-                  write(*,*) '### SAVING PROFILE ###'
-               end if
-            end if
+            ! if (s% x_integer_ctrl(10) .eq. 1) then
+            !    if (MOD(s% model_number, 10) .eq. 0) then
+            !       s% need_to_save_profiles_now = .true.
+            !       s% need_to_update_history_now = .true.
+            !       s% save_profiles_model_priority = 5
+            !       write(*,*) '### SAVING PROFILE ###'
+            !    end if
+            ! end if
 
             ! ##### ##### ##### ##### ##### ##### ##### ##### !
 
@@ -362,7 +363,7 @@
             ierr = 0
             call star_ptr(id, s, ierr)
             if (ierr /= 0) return
-            how_many_extra_profile_columns = 0
+            how_many_extra_profile_columns = 2
          end function how_many_extra_profile_columns
          
          
@@ -378,6 +379,15 @@
             if (ierr /= 0) return
 
             if (s% x_logical_ctrl(2)) return ! initial model flag
+            
+            ! Add extra accretion heat to profile columns
+            names(1) = 'Ladd'
+            names(2) = "log_Ladd"
+
+            do k = 1, s% nz
+               vals(k,1) = s% extra_heat(k) %val
+               vals(k,2) = LOG10( MAX(s% extra_heat(k) %val, 1d-10) )
+            end do
 
          end subroutine data_for_extra_profile_columns
    
@@ -425,7 +435,7 @@
             ierr = 0
             call star_ptr(id,s,ierr)
             if(ierr/=0) return
-   
+
             ! here is an example for adding an extra profile header item
             ! also set how_many_extra_profile_header_items
             ! names(1) = 'mixing_length_alpha'
@@ -450,12 +460,12 @@
             ! to update the star log,
                ! s% need_to_update_history_now = .true.
 
-            if (can_save_profile_during_burst) then
-               write(*,*) '##### saving profile during burst #####'
-               s% need_to_save_profiles_now = .true.
-               s% need_to_update_history_now = .true.
-               s% save_profiles_model_priority = 4
-            end if
+            ! if (can_save_profile_during_burst) then
+            !    write(*,*) '##### saving profile during burst #####'
+            !    s% need_to_save_profiles_now = .true.
+            !    s% need_to_update_history_now = .true.
+            !    s% save_profiles_model_priority = 4
+            ! end if
 
             ! ########## Leonard ##########
             ! Write logic for saving profiles
@@ -493,3 +503,46 @@
                end do
             end do
          end subroutine
+
+         subroutine energy_routine(id, ierr)
+            use const_def
+            integer, intent(in) :: id
+            integer, intent(out) :: ierr
+            type (star_info), pointer :: s
+
+            real(dp) :: mass, mdot, mdot_msun, alpha, radius, mcumul, beta, Ladd
+            real(dp) :: xposk, dif, xpos, thingie, thingie2, Mstar, mass_dif
+            integer :: k, xposk_orig
+
+            real(dp), parameter :: mdot_break = 3.5e-5
+            real(dp), parameter :: alpha_high = 0.2
+            real(dp), parameter :: alpha_low = 0.005
+            real(dp), parameter :: delta_break = 2.0/3.0*1e-6
+            real(dp) :: numerator, denominator
+
+            ierr = 0
+            call star_ptr(id, s, ierr)
+
+            mass = s% mstar
+            mdot = s% mstar_dot
+
+            if (mdot == 0.) return
+
+            radius = s% r(1)
+
+            mcumul = 0.
+            k = 0
+            beta = s% x_ctrl(50)
+            Ladd = beta * 5d-1 * standard_cgrav * s% star_mass * Msun * s% mstar_dot / s% r(1)           
+            
+            Mstar=(s% star_mass * Msun) ![g]
+   
+            xpos = s% x_ctrl(51)
+         
+            do k = 1, s% nz
+               if (s% star_mdot > 0.0d0 .and. s% m(k) >= (1.0d0-xpos)*(s% star_mass)*Msun ) then
+                     s% extra_heat(k) = 2.0d0 * Ladd / ( Mstar * xpos**2 ) * (s% m(k) / Mstar - (1.0d0 - xpos))
+               end if
+            end do
+  
+         end subroutine energy_routine

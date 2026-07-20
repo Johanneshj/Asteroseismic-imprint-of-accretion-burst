@@ -99,7 +99,7 @@
 	atm_T_tau_relation = 'Eddington'
 	atm_T_tau_opacity = 'varying' ! next best is 'iterated'
 
-	mesh_delta_coeff = <<mesh_coeff>>
+	mesh_delta_coeff = 0.5
 	!max_dq = 1d-4
 	max_allowed_nz = 1000000
 	! R_function_weight = 1d2

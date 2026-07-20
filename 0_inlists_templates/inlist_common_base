@@ -92,7 +92,10 @@
 	accretion_zfracs = 8 
 
 ! Use other hooks (experimental)
-	use_other_energy = .false. ! .false. = cold accretion, .true. = hot accretion
+	use_other_energy = .true. ! .false. = cold accretion, .true. = hot accretion
+	x_ctrl(50) = 0.1 ! beta for hot accretion
+	x_ctrl(51) = 0.01 ! M_outer for hot accretion
+
 	use_other_adjust_mdot = .true. ! .true. for entire setup to function
 	use_other_timestep_limit = .false. ! .false., but can be experimented with
 

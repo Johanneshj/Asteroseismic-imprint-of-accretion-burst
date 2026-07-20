@@ -7,9 +7,9 @@ source "${MESA_DIR}/star/test_suite/test_suite_helpers"
 
 date "+DATE: %Y-%m-%d%nTIME: %H:%M:%S"
 
-INITIAL_MODEL="models_to_load/0_initial_models/initial_model.mod"
-PRE_BURST_MODEL="models_to_load/1_pre_burst_models/_pre_burst_model.mod"
-POST_BURST_MODEL="models_to_load/2_post_burst_models/_post_burst_model.mod"
+INITIAL_MODEL="models_to_load/0_initial_models/hot_accretion_test.mod"
+PRE_BURST_MODEL="models_to_load/1_pre_burst_models/hot_accretion_test_1d-5.mod"
+POST_BURST_MODEL="models_to_load/2_post_burst_models/hot_accretion_test_1d-5.mod"
 
 # --- Initial model ---
 if [ ! -f "$INITIAL_MODEL" ]; then

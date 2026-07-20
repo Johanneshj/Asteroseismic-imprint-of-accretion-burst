@@ -9,19 +9,19 @@ from utils import calculate_tau, inplace_change, insert_inlist, check_mass
 
 # Parameters we want to set for the run
 # Initial model parameters
-initial_model       = f'initial_model.mod'
+initial_model       = f'hot_accretion_test.mod'
 seed_mass           = '0.01'
-mesh_delta_coeff    = '0.8' # MESA's mesh_delta_coeff
+mesh_delta_coeff    = '0.4' # MESA's mesh_delta_coeff
 initial_z           = '0.020'
 initial_h2          = '20' # ppm
 initial_he3         = '85' # ppm
 seed_radius         = '1.5' # Relax to this radius
 
 burst_mag           = '1d-3' # magnitude of burst in solar masses per year
-time_delta_coeff    = '0.8' # MESA's time_delta_coeff
+time_delta_coeff    = '0.4' # MESA's time_delta_coeff
 
-pre_burst_model     = f'_pre_burst_model.mod' # name of pre_burst_model saved at end of run
-post_burst_model    = f'_post_burst_model.mod' # name of post_burst_model saved at end of run 
+pre_burst_model     = f'hot_accretion_test_1d-5.mod' # name of pre_burst_model saved at end of run
+post_burst_model    = f'hot_accretion_test_1d-5.mod' # name of post_burst_model saved at end of run 
 ZAMS_mass           = '4.0d0' # Final mass at the ZAMS in solar masses
 dM                  = '0.05' # mass to accrete in decay of accretion rate (solar masses)
 mdot                = '1d-5' # mass accretion rate outside of burst (must be given here as 1d-6 fx)

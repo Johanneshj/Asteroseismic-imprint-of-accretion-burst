@@ -47,6 +47,6 @@
 						   	! 1 = save post-burst model 1000 years after burst
 						   	! 2 = terminate at h1 termination string
 
-    varcontrol_target = 1d-4
+    varcontrol_target = 1d-5
 	
 / ! end of controls namelist

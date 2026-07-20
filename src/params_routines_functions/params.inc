@@ -4,6 +4,7 @@ real(dp), save :: age_post_burst = -1d99
 real(dp), save :: age_pre_burst = -1d99
 real(dp), save :: age_approach_zams = -1d99
 real(dp), save :: termination_age = -1d99
+real(dp), save :: old_mass = -1d99
 
 ! Parameters for initial sigmoid increase
 ! To be defined in params_routines_functions/single_burst.inc
